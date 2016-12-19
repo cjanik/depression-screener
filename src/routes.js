@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 import Layout from './components/Layout';
 import IndexPage from './components/IndexPage';
-// import Athlete from './components/Athlete';
 import NotFound from './components/NotFound';
 
 const routes = (

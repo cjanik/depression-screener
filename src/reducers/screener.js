@@ -1,19 +1,43 @@
 const initialState = {
-  questions: {
-    one: 'Do you feel depressed?'
-  }
+  testStatus: 'prompt',
+  selectectedTest: '',
+  tests: {},
+  scores: {}
 };
+
+const validTestStatus = ['prompt', 'inProgress', 'complete'];
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_QUESTION':
+    case 'ADD_TEST':
       return {
         ...state,
-        questions: [...state.questions, action.payload.question]
+        tests: {
+          ...state.tests,
+          [action.payload.test.name]: action.payload.test
+        }
+      };
+    case 'BEGIN_TEST':
+      return {
+        ...state,
+        testStatus: 'inProgress'
+      };
+    case 'COMPLETE_TEST':
+      return {
+        ...state,
+        testStatus: 'complete',
+        scores: {
+          [state.selectectedTest]: action.payload.score
+        }
+      };
+    case 'SELECT_TEST':
+      return {
+        ...state,
+        selectectedTest: action.payload.testName
       };
     default:
       return state;
   }
 };
 
-export { initialState, reducer };
+export { initialState, reducer, validTestStatus };

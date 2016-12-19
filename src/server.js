@@ -10,6 +10,7 @@ import routes from './routes';
 import { reducer as screener } from './reducers/screener';
 import NotFound from './components/NotFound';
 import path from 'path';
+import fs from 'fs';
 
 const isDev = process.env.NODE_ENV === "dev";
 let bundlePort = 3000;
@@ -27,9 +28,9 @@ const handleRender = (req, res) => {
       }
 
       // in case of redirect propagate the redirect to the browser
-      if (redirectLocation) {
-        return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-      }
+      // if (redirectLocation) {
+      //   return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+      // }
 
       // Create a new Redux store instance
       const store = createStore(screener);
@@ -80,8 +81,15 @@ const renderFullPage = (html, preloadedState) => {
     `;
 };
 
+const getTests = (req, res) => {
+  fs.readFile(path.join(__dirname + '/static/PHQ-9.json'), (error, data) => {
+    res.json(JSON.parse(data));
+  });
+}
+
 if (!isDev) {
   app.use(express.static(path.join(__dirname + '/static')));
 }
+app.use('/api/getTests', getTests);
 app.use('/', handleRender);
 app.listen(3000);
