@@ -4,15 +4,15 @@ let plugins = [
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   }),
   new webpack.optimize.DedupePlugin(),
-  new webpack.optimize.OccurenceOrderPlugin(),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    },
-    sourceMap: true,
-    mangle: false,
-    comments: false
-  })
+  new webpack.optimize.OccurenceOrderPlugin()
+  // new webpack.optimize.UglifyJsPlugin({
+  //   compress: {
+  //     warnings: false
+  //   },
+  //   sourceMap: true,
+  //   mangle: false,
+  //   comments: false
+  // })
 ];
 
 module.exports = {

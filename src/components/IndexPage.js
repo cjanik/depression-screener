@@ -25,7 +25,9 @@ class IndexPage extends React.Component {
       case 'inProgress':
         return (
           <Test
-            questions={props.tests[props.selectectedTest]}
+            questions={props.tests[props.selectectedTest].questions}
+            currentQuestion={props.currentQuestion}
+            onAnswered={props.onAnswerQuestion}
             onCompleted={props.onCompleteTest}
           />
         );
@@ -63,6 +65,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onCompleteTest(score) {
     dispatch({ type: 'COMPLETE_TEST', payload: { score }});
+  },
+  onAnswerQuestion(questionNumber, score) {
+    dispatch({ type: 'ANSWER_QUESTION', payload: { questionNumber, score }});
   }
 });
 

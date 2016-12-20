@@ -7,13 +7,13 @@ class Prompt extends React.Component {
     for (let test in this.props.tests) {
       tests.push(
         <div className="test" key={key++}>
-        <span>{test.name}</span>
-        <button onClick={() => this.props.onSelect(test.name)}>Take test</button>
+        <span>{test} </span>
+        <button onClick={() => this.props.onSelect(test)}>Take test</button>
         </div>
       );
     }
     return (
-      <div>{tests}</div>
+      <div>{[...tests]}</div>
     );
   }
 }
